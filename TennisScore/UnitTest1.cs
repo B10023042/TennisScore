@@ -20,7 +20,6 @@ namespace TennisScore
         public void Love_All()
         {
             GivenGame(0, 0);
-
             ScoreShouldBe("Love All");
         }
 
@@ -28,8 +27,13 @@ namespace TennisScore
         public void Fifteen_Love()
         {
             GivenGame(1, 0);
-
             ScoreShouldBe("Fifteen Love");
+        }
+        [TestMethod]
+        public void Thirty_Love()
+        {
+            GivenGame(2, 0);
+            ScoreShouldBe("Thirty Love");
         }
 
         private void ScoreShouldBe(string expect)
