@@ -22,24 +22,30 @@ namespace TennisScore
                 [2] = "Thirty",
                 [3] = "Forty"
             };
-            if (game.IsDiffScore() )
+            if (game.IsDiffScore())
             {
-                if (game.SecondPlayerScore > 3)
+                if (game.IsGamePoint())
                 {
-                    return game.SecondPlayerName + " Adv";
+                    if (Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+                    {
+                        return game.AdvPlayer() + " Adv";
+
+                    }
+                    else
+                    {
+                        return game.AdvPlayer() + " Win";
+                    }
                 }
-                if (game.FirstPlayerScore > 3)
-                {
-                    return game.FirstPlayerName + " Adv";
-                }
+
+
                 return scoreLookup[game.FirstPlayerScore] + " " + scoreLookup[game.SecondPlayerScore];
             }
-            if (game.FirstPlayerScore >= 3)
+            if (game.IsDeuce())
             {
                 return "Deuce";
             }
             return scoreLookup[game.FirstPlayerScore] + " All";
-         
+
         }
     }
 }
