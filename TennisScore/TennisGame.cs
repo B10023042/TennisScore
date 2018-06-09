@@ -26,6 +26,10 @@ namespace TennisScore
             {
                 return scoreLookup[game.FirstPlayerScore] + " " + scoreLookup[game.SecondPlayerScore];
             }
+            if (game.FirstPlayerScore >= 3)
+            {
+                return "Deuce";
+            }
             return scoreLookup[game.FirstPlayerScore] + " All";
          
         }
