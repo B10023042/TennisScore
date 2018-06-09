@@ -17,17 +17,14 @@ namespace TennisScore
             var game = this._repo.GetGame(gameId);
             var scoreLookup = new Dictionary<int, string>
             {
+                [0] = "Love",
                 [1] = "Fifteen",
                 [2] = "Thirty",
                 [3] = "Forty"
             };
-            if (game.SecondPlayerScore == 1)
+            if (game.SecondPlayerScore > 0 || game.FirstPlayerScore > 0)
             {
-                return "Love " + scoreLookup[game.SecondPlayerScore];
-            }
-            if (game.FirstPlayerScore > 0)
-            {
-                return scoreLookup[game.FirstPlayerScore] + " Love";
+                return scoreLookup[game.FirstPlayerScore] + " " + scoreLookup[game.SecondPlayerScore];
             }
 
             return "Love All";

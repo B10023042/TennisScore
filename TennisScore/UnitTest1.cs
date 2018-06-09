@@ -47,6 +47,12 @@ namespace TennisScore
             GivenGame(0, 1);
             ScoreShouldBe("Love Fifteen");
         }
+        [TestMethod]
+        public void Love_Thirty()
+        {
+            GivenGame(0, 2);
+            ScoreShouldBe("Love Thirty");
+        }
         private void ScoreShouldBe(string expect)
         {
             var scoreResult = _tennisGame.ScoreResult(_gameId);
