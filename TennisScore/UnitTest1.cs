@@ -6,18 +6,31 @@ namespace TennisScore
     [TestClass]
     public class UnitTest1
     {
+        private int _gameId = 1;
+        private TennisGame _tennisGame;
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            _tennisGame = new TennisGame(Substitute.For<IRepository<Game>>());
+        }
+
         [TestMethod]
         public void Love_All()
         {
-            var gameId = 1;
+            GivenGame(0, 0);
+            ScoreShouldBe("Love All");
+        }
 
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 0, SecondPlayerScore = 0 });
+        private void ScoreShouldBe(string expect)
+        {
+            var scoreResult = _tennisGame.ScoreResult(_gameId);
+            Assert.AreEqual(expect, scoreResult);
+        }
 
-            var tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Love All", scoreResult);
+        private void GivenGame(int firstPlayerScore, int secondPlayerScore)
+        {
+            Substitute.For<IRepository<Game>>().GetGame(_gameId).Returns(new Game {Id = _gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore});
         }
     }
 }
