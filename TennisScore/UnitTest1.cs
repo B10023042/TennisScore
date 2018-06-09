@@ -6,6 +6,7 @@ namespace TennisScore
     [TestClass]
     public class UnitTest1
     {
+        private const string FirstPlayerName = "Alex";
         private int _gameId = 1;
         private TennisGame _tennisGame;
         private IRepository<Game> _repository = Substitute.For<IRepository<Game>>();
@@ -71,6 +72,12 @@ namespace TennisScore
             GivenGame(3, 3);
             ScoreShouldBe("Deuce");
         }
+        [TestMethod]
+        public void Alex_Adv()
+        {
+            GivenGame(4, 3);
+            ScoreShouldBe(FirstPlayerName + " Adv");
+        }
         private void ScoreShouldBe(string expect)
         {
             var scoreResult = _tennisGame.ScoreResult(_gameId);
@@ -79,7 +86,13 @@ namespace TennisScore
 
         private void GivenGame(int firstPlayerScore, int secondPlayerScore)
         {
-            _repository.GetGame(_gameId).Returns(new Game {Id = _gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore});
+            _repository.GetGame(_gameId).Returns(new Game
+            {
+                Id = _gameId,
+                FirstPlayerScore = firstPlayerScore,
+                SecondPlayerScore = secondPlayerScore,
+                FirstPlayerName= FirstPlayerName
+            });
         }
     }
 }
