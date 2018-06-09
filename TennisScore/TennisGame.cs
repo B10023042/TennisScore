@@ -8,7 +8,7 @@ namespace TennisScore
 
         public TennisGame(IRepository<Game> repo)
         {
-            _repo = repo;
+            _repo = repo   ;
         }
 
         public string ScoreResult(int gameId)
