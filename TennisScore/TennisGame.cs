@@ -22,9 +22,13 @@ namespace TennisScore
                 [2] = "Thirty",
                 [3] = "Forty"
             };
-            if (game.SecondPlayerScore > 0 || game.FirstPlayerScore > 0)
+            if (game.IsDiffScore() )
             {
                 return scoreLookup[game.FirstPlayerScore] + " " + scoreLookup[game.SecondPlayerScore];
+            }
+            if (game.FirstPlayerScore == 1)
+            {
+                return "Fifteen All";
             }
 
             return "Love All";
