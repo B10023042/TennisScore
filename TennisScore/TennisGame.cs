@@ -26,16 +26,8 @@ namespace TennisScore
             {
                 return scoreLookup[game.FirstPlayerScore] + " " + scoreLookup[game.SecondPlayerScore];
             }
-            if (game.FirstPlayerScore == 2)
-            {
-                return "Thirty All";
-            }
-            if (game.FirstPlayerScore == 1)
-            {
-                return "Fifteen All";
-            }
-
-            return "Love All";
+            return scoreLookup[game.FirstPlayerScore] + " All";
+         
         }
     }
 }
