@@ -8,18 +8,28 @@ namespace TennisScore
     {
         private int _gameId = 1;
         private TennisGame _tennisGame;
+        private IRepository<Game> _repository = Substitute.For<IRepository<Game>>();
 
         [TestInitialize]
         public void TestInit()
         {
-            _tennisGame = new TennisGame(Substitute.For<IRepository<Game>>());
+            _tennisGame = new TennisGame(_repository);
         }
 
         [TestMethod]
         public void Love_All()
         {
             GivenGame(0, 0);
+
             ScoreShouldBe("Love All");
+        }
+
+        [TestMethod]
+        public void Fifteen_Love()
+        {
+            GivenGame(1, 0);
+
+            ScoreShouldBe("Fifteen Love");
         }
 
         private void ScoreShouldBe(string expect)
@@ -30,7 +40,7 @@ namespace TennisScore
 
         private void GivenGame(int firstPlayerScore, int secondPlayerScore)
         {
-            Substitute.For<IRepository<Game>>().GetGame(_gameId).Returns(new Game {Id = _gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore});
+            _repository.GetGame(_gameId).Returns(new Game {Id = _gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore});
         }
     }
 }
