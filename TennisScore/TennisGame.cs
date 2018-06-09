@@ -24,6 +24,10 @@ namespace TennisScore
             };
             if (game.IsDiffScore() )
             {
+                if (game.SecondPlayerScore > 3)
+                {
+                    return game.SecondPlayerName + " Adv";
+                }
                 if (game.FirstPlayerScore > 3)
                 {
                     return game.FirstPlayerName + " Adv";
