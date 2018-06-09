@@ -1,4 +1,7 @@
-﻿namespace TennisScore
+﻿using System;
+using System.Collections.Generic;
+
+namespace TennisScore
 {
     public class Game
     {
@@ -25,8 +28,52 @@
 
         public bool IsDeuce()
         {
-            var isSameScore = FirstPlayerScore==SecondPlayerScore;
+            var isSameScore = FirstPlayerScore == SecondPlayerScore;
             return FirstPlayerScore >= 3 && isSameScore;
+        }
+
+        public bool IsAdv()
+        {
+            return Math.Abs(FirstPlayerScore - SecondPlayerScore) == 1;
+        }
+
+        public static Dictionary<int, string> _scoreLookup = new Dictionary<int, string>
+        {
+            [0] = "Love",
+            [1] = "Fifteen",
+            [2] = "Thirty",
+            [3] = "Forty"
+        };
+
+
+        public string SorceLookUp()
+        {
+            return Game._scoreLookup[FirstPlayerScore] + " " + Game._scoreLookup[SecondPlayerScore];
+        }
+
+
+        public string GamePointState()
+        {
+            if (IsAdv())
+            {
+                return AdvPlayer() + " Adv";
+            }
+            else
+            {
+                return AdvPlayer() + " Win";
+            }
+        }
+
+        public string LookUpScoreResult()
+        {
+            return Game._scoreLookup[FirstPlayerScore] + " " + Game._scoreLookup[SecondPlayerScore];
+        }
+
+        public static string Deuce = "Deuce";
+
+        public string SameScoreResult()
+        {
+            return Game._scoreLookup[FirstPlayerScore] + " All";
         }
     }
 }
